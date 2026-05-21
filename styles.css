@@ -13,10 +13,27 @@
 }
 
 .button, #visor {
-    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
     border-radius: 5px;
     flex: 1;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: xx-large;
-    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 0;
+}
+
+#visor {
+    justify-content: flex-end;
+}
+
+.button.number {
+    background-color: white;
+}
+
+.button.operator {
+    background-color: gold;
 }
