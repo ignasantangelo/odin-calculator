@@ -31,13 +31,11 @@ function operate(a, b, operator) {
         case '+': return add(a, b);
         case '-': return substract(a, b);
         case 'x': return multiply(a, b);
-        case '÷': return divide(a, b);
-        case '=': {
-            num1 = '';
-            num2 = '';
-            operation = '';
-            return a;
+        case '÷': {
+            if (b === 0) return '#DIV/0!';
+            else return divide(a, b);
         };
+        case '=': return a;
         default: return 'Operation not allowed';
     }
 }
@@ -48,8 +46,14 @@ numberButtons.forEach(button => {
             num1 += button.textContent;
             visor.textContent = num1;
         } else {
-            num2 += button.textContent;
-            visor.textContent = num2;
+            if (operation === '=') {
+                num1 = button.textContent;
+                visor.textContent = num1;
+                updatingNumber1 = true;
+            } else {
+                num2 += button.textContent;
+                visor.textContent = num2;
+            }
         }
     })
 })
@@ -58,6 +62,11 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (num1 === '') return; // ignore if no first number yet
         if (num2 !== '') {
+            if (num1 === '#DIV/0!') {
+                num1 = '';
+                updatingNumber1 = true;
+                return; // ignore if the previous result was an error
+            }
             num1 = operate(num1, num2, operation).toString();
             num2 = '';
             visor.textContent = num1;
