@@ -33,7 +33,7 @@ body {
     margin: 0;
 }
 
-.button:active {
+.button:active, .button.is-active {
     transform: translateY(2px);
     filter: brightness(0.85);
 }
