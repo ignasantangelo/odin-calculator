@@ -43,8 +43,8 @@ function operate(a, b, operator) {
     }
 }
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
+function createNumberHandler(button) {
+    return function handleNumberButton() {
         if (updatingNumber1) {
             num1 += button.textContent;
             visor.textContent = num1;
@@ -58,11 +58,11 @@ numberButtons.forEach(button => {
                 visor.textContent = num2;
             }
         }
-    })
-})
+    }
+}
 
-operatorButtons.forEach(button => {
-    button.addEventListener('click', () => {
+function createOperatorHandler(button) {
+    return function handleOperatorButton() {
         if (num1 === '') return; // ignore if no first number yet
         if (num2 !== '') {
             if (num1 === '#DIV/0!') {
@@ -76,18 +76,18 @@ operatorButtons.forEach(button => {
         }
         operation = button.textContent;
         updatingNumber1 = false;
-    })
-})
+    }
+}
 
-allClear.addEventListener('click', () => {
+function handleAllClear() {
     num1 = '';
     num2 = '';
     operation = '';
     updatingNumber1 = true;
     visor.textContent = '';
-})
+}
 
-dot.addEventListener('click', () => {
+function handleDot() {
     if (updatingNumber1) {
         if (num1.includes('.')) return; // ignore if the number already has a decimal
         if (num1 === '') {
@@ -107,7 +107,19 @@ dot.addEventListener('click', () => {
         num2 += '.';
         visor.textContent = num2;
     }
-})
+}
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', createNumberHandler(button));
+});
+
+operatorButtons.forEach(button => {
+    button.addEventListener('click', createOperatorHandler(button))
+});
+
+allClear.addEventListener('click', handleAllClear)
+
+dot.addEventListener('click', handleDot)
 
 backspace.addEventListener('click', () => {
     if (updatingNumber1) {
