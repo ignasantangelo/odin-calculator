@@ -2,9 +2,11 @@ let num1 = '';
 let num2 = '';
 let operation = '';
 let updatingNumber1 = true;
+let isDotAdded = false;
 
 const visor = document.getElementById('visor');
 const allClear = document.getElementById('all-clear');
+const dot = document.getElementById('dot');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
 
@@ -25,8 +27,8 @@ function divide(a, b) {
 }
 
 function operate(a, b, operator) {
-    a = parseInt(a);
-    b = parseInt(b);
+    a = parseFloat(a);
+    b = parseFloat(b);
     switch(operator) {
         case '+': return add(a, b);
         case '-': return substract(a, b);
@@ -82,4 +84,26 @@ allClear.addEventListener('click', () => {
     operation = '';
     updatingNumber1 = true;
     visor.textContent = '';
+})
+
+dot.addEventListener('click', () => {
+    if (updatingNumber1) {
+        if (num1.includes('.')) return; // ignore if the number already has a decimal
+        if (num1 === '') {
+            num1 = '0.';
+            visor.textContent = num1;
+            return;
+        }
+        num1 += '.';
+        visor.textContent = num1;
+    } else {
+        if (num2.includes('.')) return; // ignore if the number already has a decimal
+        if (num2 === '') {
+            num2 = '0.';
+            visor.textContent = num2;
+            return;
+        }
+        num2 += '.';
+        visor.textContent = num2;
+    }
 })
