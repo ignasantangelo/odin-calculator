@@ -7,6 +7,7 @@ let isDotAdded = false;
 const visor = document.getElementById('visor');
 const allClear = document.getElementById('all-clear');
 const dot = document.getElementById('dot');
+const backspace = document.getElementById('backspace');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
 
@@ -104,6 +105,16 @@ dot.addEventListener('click', () => {
             return;
         }
         num2 += '.';
+        visor.textContent = num2;
+    }
+})
+
+backspace.addEventListener('click', () => {
+    if (updatingNumber1) {
+        num1 = num1.slice(0, -1);
+        visor.textContent = num1;
+    } else {
+        num2 = num2.slice(0, -1);
         visor.textContent = num2;
     }
 })
