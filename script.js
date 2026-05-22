@@ -125,6 +125,6 @@ numberButtons.forEach(button => {
 operatorButtons.forEach(button => {
     button.addEventListener('click', createOperatorHandler(button))
 });
-allClear.addEventListener('click', handleAllClear):
+allClear.addEventListener('click', handleAllClear);
 dot.addEventListener('click', handleDot);
 backspace.addEventListener('click', handleBackspace);
