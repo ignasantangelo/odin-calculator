@@ -109,19 +109,7 @@ function handleDot() {
     }
 }
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', createNumberHandler(button));
-});
-
-operatorButtons.forEach(button => {
-    button.addEventListener('click', createOperatorHandler(button))
-});
-
-allClear.addEventListener('click', handleAllClear)
-
-dot.addEventListener('click', handleDot)
-
-backspace.addEventListener('click', () => {
+function handleBackspace() {
     if (updatingNumber1) {
         num1 = num1.slice(0, -1);
         visor.textContent = num1;
@@ -129,4 +117,14 @@ backspace.addEventListener('click', () => {
         num2 = num2.slice(0, -1);
         visor.textContent = num2;
     }
-})
+}
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', createNumberHandler(button));
+});
+operatorButtons.forEach(button => {
+    button.addEventListener('click', createOperatorHandler(button))
+});
+allClear.addEventListener('click', handleAllClear):
+dot.addEventListener('click', handleDot);
+backspace.addEventListener('click', handleBackspace);
